@@ -8,8 +8,8 @@ Powered by [Shazam](https://www.shazam.com)
 > Before running any of the following, make sure you have ffmpeg in your PATH
 ```
 git clone https://github.com/FoxeiZ/autoID3
-pip install -r requirements.txt
 cd autoID3
+pip install -r requirements.txt
 python main.py <moozic folder goes here>
 ```
 Some setting:
