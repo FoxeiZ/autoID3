@@ -40,7 +40,7 @@ for item in Path(sys.argv[1]).glob('*.mp3'):
         if test:
             continue
 
-        # mutagen for check for existing tag
+        # check for existing metadata
         if not audiofile['title']:
             print('start writing tag...')
             audiofile['artist'] = data[1]['track']['subtitle']
