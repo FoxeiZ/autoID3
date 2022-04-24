@@ -62,8 +62,8 @@ if __name__ == '__main__':
 
     if path.is_dir():
         for item in path.glob('*.mp3'):
-            main(item, True)
+            main(item)
     else:
-        main(path, True)
+        main(path)
 
     print('total error: ', error)
