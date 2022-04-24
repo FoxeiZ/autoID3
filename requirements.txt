@@ -1,2 +1,9 @@
-mutagen
-ShazamAPI
+certifi==2021.10.8
+charset-normalizer==2.0.12
+idna==3.3
+mutagen==1.45.1
+numpy==1.22.3
+pydub==0.25.1
+requests==2.27.1
+urllib3==1.26.9
+git+https://github.com/Numenorean/ShazamAPI

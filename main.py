@@ -8,11 +8,7 @@ from mutagen.easyid3 import EasyID3
 import mutagen.id3
 
 
-error = 0
-test = True
-
-for item in Path(sys.argv[1]).glob('*.mp3'):
-
+def main(item, test=False):
     audiofile = MP3(item, ID3=EasyID3)
 
     if audiofile.info.length > 35.0:
@@ -26,19 +22,19 @@ for item in Path(sys.argv[1]).glob('*.mp3'):
     except mutagen.id3.error:
         pass
 
-    shazam = Shazam(mp3_file).recognizeSong()
+    shazam = Shazam(mp3_file, lang='us').recognizeSong()
     data = next(shazam)
 
     if not data[1]['matches']:
         print(item, ': cant find metadata for this song\n')
         error += 1
-        continue
+        return
 
     try:
         print(f"{item} -> {data[1]['track']['subtitle']} - {data[1]['track']['title']}.mp3\n")
 
         if test:
-            continue
+            return
 
         # check for existing metadata
         if not audiofile['title']:
@@ -57,5 +53,17 @@ for item in Path(sys.argv[1]).glob('*.mp3'):
     except KeyError:
         print('missing data, skipping!\n')
         error += 1
+        return
 
-print('total error: ', error)
+
+if __name__ == '__main__':
+    error = 0
+    path = Path(sys.argv[1])
+
+    if path.is_dir():
+        for item in path.glob('*.mp3'):
+            main(item, True)
+    else:
+        main(path, True)
+
+    print('total error: ', error)
